@@ -1,0 +1,39 @@
+.hexagon {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    background-color: #4a5568;
+    /* Tailwind gray-700 */
+    margin: 50px;
+}
+
+.hexagon:before,
+.hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+}
+
+.hexagon:before {
+    bottom: 100%;
+    border-bottom: 50px solid #4a5568;
+    /* Tailwind gray-700 */
+}
+
+.hexagon:after {
+    top: 100%;
+    width: 0;
+    border-top: 50px solid #4a5568;
+    /* Tailwind gray-700 */
+}
+
+.hexagon-concave {
+    position: relative;
+    clip-path: polygon(50% 20%, 100% 0%, 100% 80%, 50% 100%, 0% 80%, 0% 15%, 0% 0%);
+    width: 100px;
+    height: 150px;
+    background-color: rgb(155, 216, 25)
+    /* Tailwind gray-700 */
+}
