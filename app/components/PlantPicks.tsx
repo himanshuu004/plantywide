@@ -105,8 +105,8 @@ const PlantPicks: React.FC = () => {
             }`}
           >
             <div className="px-6 border-l-[1px] border-[#dfdfdf] font-thin">
-              Let us know your specific requirements, and we'll match you with
-              the perfect plants.
+              Let us know your specific requirements, and we&#39;ll match you
+              with the perfect plants.
             </div>
           </div>
         )}
