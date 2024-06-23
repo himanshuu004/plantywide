@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Hero from "./components/Hero";
 import Occasions from "./components/occasions";
 import ScubsCard from "./components/ScubsCard";
