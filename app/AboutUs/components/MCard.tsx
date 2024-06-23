@@ -1,19 +1,14 @@
 import React from "react";
 import Image from "next/image";
 
-interface GCardsProps {
+interface MCardProps {
   title: string;
   description: string;
   bgcolor: string;
   url: string;
 }
 
-const GCards: React.FC<GCardsProps> = ({
-  title,
-  description,
-  bgcolor,
-  url,
-}) => {
+const MCard: React.FC<MCardProps> = ({ title, description, bgcolor, url }) => {
   return (
     <div
       className={`w-1/3  bg-[#${bgcolor}] py-4 px-4 rounded-md flex flex-col justify-start items-start gap-2 `}
@@ -32,4 +27,4 @@ const GCards: React.FC<GCardsProps> = ({
   );
 };
 
-export default GCards;
+export default MCard;
