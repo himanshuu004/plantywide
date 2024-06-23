@@ -1,4 +1,3 @@
-
 import Hero from "./components/Hero";
 import Occasions from "./components/occasions";
 import ScubsCard from "./components/ScubsCard";
@@ -8,6 +7,8 @@ import GetStarted from "./components/GetStarted";
 import { JetBrains_Mono } from "@next/font/google";
 import GifthGrowth from "./components/GifthGrowth";
 import WhyUs from "./components/WhyUs";
+import { HeroImg } from "@/public";
+import Image from "next/image";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
@@ -37,6 +38,16 @@ export default function Home() {
       </div>
       <div className="w-full h-full bg-[#dfdfdf] text-[#fdfdfd] flex flex-col justify-center items-center">
         <GetStarted />
+      </div>
+      <div className="w-2/5 flex justify-center items-center">
+        <Image
+          src={HeroImg}
+          alt="Hero"
+          width={1000}
+          height={1000}
+          priority
+          className="h-[400px] w-full overflow-x-hidden object-cover rounded-md"
+        />
       </div>
     </main>
   );
