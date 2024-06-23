@@ -5,7 +5,8 @@ import HeroC from "./components/hero";
 import Founders from "./components/Founders";
 import Partners from "./components/Partners";
 import ReturnToCom from "./components/ReturnToCom";
-// import Mission from "@/app/AboutUs/components/Mission";
+import Vision from "./components/Vision";
+
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
@@ -26,7 +27,7 @@ const AboutUs = () => {
         <HeroC />
       </div>
 
-      {/* <Mission /> */}
+        <Vision />
       <div className="w-full h-full bg-[#dcff50] text-[#212121] flex flex-col justify-center items-center">
         <Founders />
       </div>
