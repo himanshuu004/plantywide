@@ -22,10 +22,12 @@ export default function Home() {
       <div className="w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center">
         <Hero />
         <Occasions />
-        <ScubsCard />
       </div>
       <div className="w-full h-full bg-[#dfdfdf] text-[#fdfdfd] flex flex-col justify-center items-center">
         <PlantPicks />
+      </div>
+      <div className="w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center">
+        <ScubsCard />
       </div>
       <div className="w-full h-full bg-[#a9f00f] text-[#fdfdfd] flex flex-col justify-center items-center">
         <Celebrations />
