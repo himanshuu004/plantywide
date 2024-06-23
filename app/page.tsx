@@ -41,16 +41,6 @@ export default function Home() {
       <div className="w-full h-full bg-[#dfdfdf] text-[#fdfdfd] flex flex-col justify-center items-center">
         <GetStarted />
       </div>
-      <div className="w-2/5 flex justify-center items-center">
-        <Image
-          src={HeroImg}
-          alt="Hero"
-          width={1000}
-          height={1000}
-          priority
-          className="h-[400px] w-full overflow-x-hidden object-cover rounded-md"
-        />
-      </div>
     </main>
   );
 }
