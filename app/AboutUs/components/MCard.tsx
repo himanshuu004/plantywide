@@ -1,11 +1,11 @@
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface MCardProps {
   title: string;
   description: string;
   bgcolor: string;
-  url: string;
+  url: string | StaticImageData;
 }
 
 const MCard: React.FC<MCardProps> = ({ title, description, bgcolor, url }) => {
