@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "@next/font/google";
 import HeroC from "./components/HeroC";
 import GetinTouch from "./components/GetinTouch";
 import Occasions from "./components/occasions";
+import FAQ from "./components/FAQ";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
@@ -20,6 +21,9 @@ const Contactus = () => {
         <GetinTouch />
       </div>
       <Occasions />
+      <div className="w-full h-full bg-[#000000] text-[#fdfdfd] flex flex-col justify-center items-center">
+        <FAQ />
+      </div>
     </div>
   );
 };
