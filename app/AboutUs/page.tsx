@@ -1,10 +1,11 @@
 import React from "react";
 import { JetBrains_Mono } from "@next/font/google";
 import HeroC from "./components/hero";
-import Mission from "./components/Mission";
+
 import Founders from "./components/Founders";
 import Partners from "./components/Partners";
 import ReturnToCom from "./components/ReturnToCom";
+import Mission from "@/app/AboutUs/components/Mission";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
