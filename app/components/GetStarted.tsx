@@ -13,7 +13,7 @@ const GetStarted: React.FC = () => {
         <div className="w-auto rounded-md bg-transparent text-[#dcff50] border-2 border-[#dcff50] font-semibold p-4">
           Explore Subscriptions
         </div>
-        <Link href="/contact-us">
+        <Link href="/ContactUs">
           <div className="w-auto rounded-md bg-[#dcff50] text-[#212121] font-semibold p-4">
             Contact Us
           </div>

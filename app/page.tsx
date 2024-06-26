@@ -7,8 +7,7 @@ import GetStarted from "./components/GetStarted";
 import { JetBrains_Mono } from "@next/font/google";
 import GifthGrowth from "./components/GifthGrowth";
 import WhyUs from "./components/WhyUs";
-import { HeroImg } from "@/public";
-import Image from "next/image";
+import Navbar from "./components/Navbar";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
@@ -20,14 +19,15 @@ export default function Home() {
       className={`w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className}`}
     >
       <div className="w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center">
+        <Navbar />
         <Hero />
         <Occasions />
       </div>
-      <div className="w-full h-full bg-[#dfdfdf] text-[#fdfdfd] flex flex-col justify-center items-center">
-        <PlantPicks />
-      </div>
       <div className="w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center">
         <ScubsCard />
+      </div>
+      <div className="w-full h-full bg-[#fdfdfd] text-[#fdfdfd] flex flex-col justify-center items-center">
+        <PlantPicks />
       </div>
       <div className="w-full h-full bg-[#a9f00f] text-[#fdfdfd] flex flex-col justify-center items-center">
         <Celebrations />
@@ -38,7 +38,7 @@ export default function Home() {
       <div className="w-full h-full bg-[#a9f00f] text-[#fdfdfd] flex flex-col justify-center items-center">
         <WhyUs />
       </div>
-      <div className="w-full h-full bg-[#dfdfdf] text-[#fdfdfd] flex flex-col justify-center items-center">
+      <div className="w-full h-full bg-[#fdfdfd] text-[#fdfdfd] flex flex-col justify-center items-center">
         <GetStarted />
       </div>
     </main>
