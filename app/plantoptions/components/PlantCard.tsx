@@ -1,15 +1,16 @@
 import React from "react";
 import Image from "next/image";
-import { Banayan } from "@/public";
+import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 
 interface PlantCardProps {
   name: string;
   imag: string | StaticImageData;
+  id: string;
 }
 
-const PlantCard: React.FC<PlantCardProps> = ({ name, imag }) => {
+const PlantCard: React.FC<PlantCardProps> = ({ name, imag, id }) => {
   return (
     <div className="bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-md overflow-clip ">
       <div>
@@ -39,9 +40,11 @@ const PlantCard: React.FC<PlantCardProps> = ({ name, imag }) => {
         </div>
       </div>
       <div className="w-full ">
-        <div className="w-full rounded-sm flex items-center justify-center bg-[#dcff50] text-[#212121] font-semibold px-4 py-2">
-          Select
-        </div>
+        <Link href={`/plants/${id}`}>
+          <div className="w-full rounded-sm flex items-center justify-center bg-[#dcff50] text-[#212121] font-semibold px-4 py-2">
+            Select
+          </div>
+        </Link>
       </div>
     </div>
   );

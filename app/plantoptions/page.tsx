@@ -32,6 +32,7 @@ const AboutUs = () => {
                   <div key={plant.id} className="plant-card">
                     <PlantCard
                       key={plant.id}
+                      id={plant.id}
                       imag={plant.plantImage}
                       name={plant.plantName}
                     />
