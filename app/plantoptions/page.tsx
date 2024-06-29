@@ -23,11 +23,11 @@ const AboutUs = () => {
         <div className="plant-list">
           {Object.keys(Plants).map((occasion) => (
             <div
-              className="w-full  max-w-[960px] flex flex-col justify-start items-start py-10 gap-8 text-[#dcff50]"
+              className="w-full max-w-[960px] flex flex-col justify-start items-start py-10 gap-8 text-[#dcff50]"
               key={occasion}
             >
               <h2 className="text-4xl">{occasion}</h2>
-              <div className=" w-full flex justify-center items-center gap-6">
+              <div className="w-full flex justify-center items-center gap-6">
                 {Plants[occasion as keyof typeof Plants].map((plant) => (
                   <div key={plant.id} className="plant-card">
                     <PlantCard
