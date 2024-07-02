@@ -8,7 +8,7 @@ import { JetBrains_Mono } from "@next/font/google";
 import GifthGrowth from "./components/GifthGrowth";
 import WhyUs from "./components/WhyUs";
 import Navbar from "./components/Navbar";
-import PlantList from "./components/PlantList";
+
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options

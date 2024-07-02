@@ -8,7 +8,9 @@ const Navbar = () => {
       <div>
         <ul className=" w-auto flex justify-end items-end gap-8 ">
           <li>Home</li>
-          <li>Explore</li>
+          <Link href="/plantoptions">
+            <li>Explore</li>
+          </Link>
           <li>Subscription</li>
           <Link href="/AboutUs">
             <li>About Us</li>
