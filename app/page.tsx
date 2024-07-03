@@ -4,11 +4,10 @@ import ScubsCard from "./components/ScubsCard";
 import PlantPicks from "./components/PlantPicks";
 import Celebrations from "./components/Celebrations";
 import GetStarted from "./components/GetStarted";
-import { JetBrains_Mono } from "@next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import GifthGrowth from "./components/GifthGrowth";
 import WhyUs from "./components/WhyUs";
 import Navbar from "./components/Navbar";
-
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options

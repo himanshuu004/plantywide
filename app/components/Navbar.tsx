@@ -7,11 +7,15 @@ const Navbar = () => {
       <div className=" w-auto text-4xl font-bold text-[#dcff50]">Planty</div>
       <div>
         <ul className=" w-auto flex justify-end items-end gap-8 ">
-          <li>Home</li>
+          <Link href="/">
+            <li>Home</li>
+          </Link>
           <Link href="/plantoptions">
             <li>Explore</li>
           </Link>
-          <li>Subscription</li>
+          <Link href="/subscription">
+            <li>Subscription</li>
+          </Link>
           <Link href="/AboutUs">
             <li>About Us</li>
           </Link>
