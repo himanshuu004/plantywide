@@ -1,21 +1,30 @@
-// Import necessary modules
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 
-// Define PlantCardProps interface
 interface PlantCardProps {
   name: string;
   imag: string | StaticImageData;
   id: string;
+  isSelected: boolean;
+  onSelect: () => void;
 }
 
-// Define PlantCard component
-const PlantCard: React.FC<PlantCardProps> = ({ name, imag, id }) => {
+const PlantCard: React.FC<PlantCardProps> = ({
+  name,
+  imag,
+  id,
+  isSelected,
+  onSelect,
+}) => {
   return (
-    <div className="bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-md overflow-clip ">
+    <div
+      className={`bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-md overflow-clip ${
+        isSelected ? "border-2 border-[#dcff50]" : ""
+      }`}
+    >
       <div>
         <Image
           src={typeof imag === "string" ? imag : imag.src}
@@ -48,8 +57,13 @@ const PlantCard: React.FC<PlantCardProps> = ({ name, imag, id }) => {
         </div>
       </div>
       <div className="w-full ">
-        <div className="w-full rounded-sm flex items-center justify-center bg-[#dcff50] text-[#212121] font-semibold px-4 py-2">
-          Select
+        <div
+          className={`w-full rounded-sm flex items-center justify-center bg-[#dcff50] text-[#212121] font-semibold px-4 py-2 cursor-pointer ${
+            isSelected ? "bg-red-500" : "bg-[#dcff50]"
+          }`}
+          onClick={onSelect}
+        >
+          {isSelected ? "Unselect" : "Select"}
         </div>
       </div>
     </div>

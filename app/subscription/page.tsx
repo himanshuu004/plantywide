@@ -1,7 +1,6 @@
 import React from "react";
 import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
-import Plants from "../constants";
 import SCard from "./components/subscard";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -9,7 +8,7 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"], // Specify the subsets you want to use
 });
 
-const AboutUs = () => {
+const SubscriptionPage = () => {
   return (
     <div
       className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className} pb-10`}
@@ -33,6 +32,7 @@ const AboutUs = () => {
                 "Includes packaging and transportation",
                 "Personalized care instructions",
               ]}
+              limit="1"
             />
             <SCard
               Oprice={4000}
@@ -43,6 +43,7 @@ const AboutUs = () => {
                 "Includes packaging and transportation",
                 "Personalized care instructions",
               ]}
+              limit="4"
             />
             <SCard
               Oprice={null}
@@ -54,6 +55,7 @@ const AboutUs = () => {
                 "Includes packaging and transportation",
                 "Personalized care instructions",
               ]}
+              limit="multiple"
             />
           </div>
         </div>
@@ -62,4 +64,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default SubscriptionPage;

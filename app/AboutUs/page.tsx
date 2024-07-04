@@ -1,5 +1,5 @@
 import React from "react";
-import { JetBrains_Mono } from "@next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import HeroC from "./components/hero";
 
 import Founders from "./components/Founders";
