@@ -6,7 +6,7 @@ import Founders from "./components/Founders";
 import Partners from "./components/Partners";
 import ReturnToCom from "./components/ReturnToCom";
 import Vision from "./components/Vision";
-
+import Navbar from "../components/Navbar";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
@@ -18,6 +18,7 @@ const AboutUs = () => {
     <div
       className={`w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className}`}
     >
+      <Navbar />
       <div
         className="w-full h-full bg-cover bg-center text-[#fdfdfd] flex flex-col justify-center items-center"
         style={{
@@ -27,7 +28,7 @@ const AboutUs = () => {
         <HeroC />
       </div>
 
-        <Vision />
+      <Vision />
       <div className="w-full h-full bg-[#dcff50] text-[#212121] flex flex-col justify-center items-center">
         <Founders />
       </div>
