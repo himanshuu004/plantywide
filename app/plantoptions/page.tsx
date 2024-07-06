@@ -1,46 +1,45 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
+import Plants from "../constants";
 import PlantCard from "./components/PlantCard";
-import Plants from "@/app/constants";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
-const AboutUs = () => {
+const jetBrainsMono = JetBrains_Mono({
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
+
+const PlantOptions = () => {
+  const searchParams = useSearchParams();
+  const limit = searchParams.get("limit");
   const router = useRouter();
-  const pathname = usePathname();
-  const limit = useSearchParams();
+  const [selectedPlants, setSelectedPlants] = useState<string[]>([]);
+  const selectionLimit = limit === "multiple" ? Infinity : Number(limit);
 
   useEffect(() => {
-    const url = `${pathname}?${limit}`;
-    console.log(url);
-    // You can now use the current URL
-    // ...
-  }, [pathname, limit]);
-
-  // const limit :String | Number = searchParams;
-  const [selectedPlants, setSelectedPlants] = useState<string[]>([]);
-  const selectionLimit =
-    limit === "multiple" ? Infinity : parseInt(limit as string, 10);
+    if (!limit) {
+      router.push("/subscription");
+    }
+  }, [limit, router]);
 
   const toggleSelection = (id: string) => {
-    setSelectedPlants((prevSelected) => {
-      if (prevSelected.includes(id)) {
-        return prevSelected.filter((plantId) => plantId !== id);
-      } else if (prevSelected.length < selectionLimit) {
-        return [...prevSelected, id];
-      }
-      return prevSelected;
-    });
+    console.log(selectedPlants);
+    setSelectedPlants((prevSelectedPlants) =>
+      prevSelectedPlants.includes(id)
+        ? prevSelectedPlants.filter((plantId) => plantId !== id)
+        : prevSelectedPlants.length < selectionLimit
+        ? [...prevSelectedPlants, id]
+        : prevSelectedPlants
+    );
   };
 
-  useEffect(() => {
-    setSelectedPlants([]); // Reset selection when the component mounts or limit changes
-  }, [limit]);
-
   return (
-    <div className="w-full h-full bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center pb-10">
+    <div
+      className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className} pb-10`}
+    >
       <Navbar />
       <p className="text-lg font-thin">
         Choose from the wide variety of plants, specially selected for special
@@ -55,14 +54,21 @@ const AboutUs = () => {
             <h2 className="text-4xl">{occasion}</h2>
             <div className="w-full flex justify-center items-center gap-6">
               {Plants[occasion as keyof typeof Plants].map((plant) => (
-                <div key={plant.id} className="plant-card">
+                <div
+                  key={plant.id}
+                  className={`plant-card ${
+                    selectedPlants.includes(plant.id)
+                      ? "bg-[#dcff50] text-[#212121]"
+                      : ""
+                  }`}
+                >
                   <PlantCard
                     key={plant.id}
                     id={plant.id}
                     imag={plant.plantImage}
                     name={plant.plantName}
-                    isSelected={selectedPlants.includes(plant.id)}
                     onSelect={() => toggleSelection(plant.id)}
+                    isSelected={selectedPlants.includes(plant.id)}
                   />
                 </div>
               ))}
@@ -74,4 +80,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default PlantOptions;
