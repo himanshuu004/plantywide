@@ -1,11 +1,12 @@
 import React from "react";
 import { JetBrains_Mono } from "next/font/google";
+
 import Navbar from "@/app/components/Navbar";
 import SCard from "./components/subscard";
 
 const jetBrainsMono = JetBrains_Mono({
-  weight: ["200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
-  subsets: ["latin"], // Specify the subsets you want to use
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
 });
 
 const SubscriptionPage = () => {

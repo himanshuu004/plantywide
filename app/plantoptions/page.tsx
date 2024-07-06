@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
 import Plants from "../constants";
@@ -12,7 +12,7 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-const PlantOptions = () => {
+const PlantOptionsComponent = () => {
   const searchParams = useSearchParams();
   const limit = searchParams.get("limit");
   const router = useRouter();
@@ -26,7 +26,6 @@ const PlantOptions = () => {
   }, [limit, router]);
 
   const toggleSelection = (id: string) => {
-    console.log(selectedPlants);
     setSelectedPlants((prevSelectedPlants) =>
       prevSelectedPlants.includes(id)
         ? prevSelectedPlants.filter((plantId) => plantId !== id)
@@ -77,6 +76,14 @@ const PlantOptions = () => {
         ))}
       </div>
     </div>
+  );
+};
+
+const PlantOptions = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PlantOptionsComponent />
+    </Suspense>
   );
 };
 
