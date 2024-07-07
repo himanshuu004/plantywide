@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect, Suspense } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
@@ -16,7 +15,7 @@ const PlantOptionsComponent = () => {
   const searchParams = useSearchParams();
   const limit = searchParams.get("limit");
   const router = useRouter();
-  const [selectedPlants, setSelectedPlants] = useState<string[]>([]);
+  const [selectedPlants, setSelectedPlants] = useState<string[]>(JSON.parse(window.localStorage.getItem("selectedPlants") || "[]"));
   const selectionLimit = limit === "multiple" ? Infinity : Number(limit);
 
   useEffect(() => {
@@ -26,6 +25,7 @@ const PlantOptionsComponent = () => {
   }, [limit, router]);
 
   const toggleSelection = (id: string) => {
+
     setSelectedPlants((prevSelectedPlants) =>
       prevSelectedPlants.includes(id)
         ? prevSelectedPlants.filter((plantId) => plantId !== id)
@@ -34,6 +34,12 @@ const PlantOptionsComponent = () => {
         : prevSelectedPlants
     );
   };
+  useEffect(() => {
+    window.localStorage.setItem(
+      "selectedPlants",
+      JSON.stringify(selectedPlants)
+    );
+  }, [selectedPlants]);
 
   return (
     <div
@@ -57,7 +63,7 @@ const PlantOptionsComponent = () => {
                   key={plant.id}
                   className={`plant-card ${
                     selectedPlants.includes(plant.id)
-                      ? "bg-[#dcff50] text-[#212121]"
+                      ? " text-[#212121]"
                       : ""
                   }`}
                 >

@@ -20,7 +20,7 @@ const PlantCard: React.FC<PlantCardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-lg overflow-clip `}
+      className={`bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-lg rounded-b-lg `}
     >
       <div>
         <Image
@@ -45,9 +45,9 @@ const PlantCard: React.FC<PlantCardProps> = ({
         </div>
       </div>
       <div
-        onClick={onSelect}
-        className={`w-[100%] rounded-lg  text-[#212121] font-semibold mt-4 px-4 py-2 cursor-pointer text-center ${
-          isSelected ? "bg-[#ed7777]" : "bg-[#dcff50]"
+        onClick={()=>{onSelect()}}
+        className={`w-[100%]   text-[#212121] font-semibold mt-4 px-4 py-2 cursor-pointer rounded-b-lg text-center ${
+          isSelected ? "bg-[#ed7777] " : "bg-[#dcff50]"
         }`}
       >
         {isSelected ? "Selected" : "Select"}
