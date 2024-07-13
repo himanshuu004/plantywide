@@ -15,7 +15,9 @@ const PlantOptionsComponent = () => {
   const searchParams = useSearchParams();
   const limit = searchParams.get("limit");
   const router = useRouter();
-  const [selectedPlants, setSelectedPlants] = useState<string[]>(JSON.parse(window.localStorage.getItem("selectedPlants") || "[]"));
+  const [selectedPlants, setSelectedPlants] = useState<string[]>(
+    JSON.parse(window.localStorage.getItem("selectedPlants") || "[]")
+  );
   const selectionLimit = limit === "multiple" ? Infinity : Number(limit);
 
   useEffect(() => {
@@ -25,7 +27,6 @@ const PlantOptionsComponent = () => {
   }, [limit, router]);
 
   const toggleSelection = (id: string) => {
-
     setSelectedPlants((prevSelectedPlants) =>
       prevSelectedPlants.includes(id)
         ? prevSelectedPlants.filter((plantId) => plantId !== id)
@@ -46,14 +47,26 @@ const PlantOptionsComponent = () => {
       className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className} pb-10`}
     >
       <Navbar />
-      <p className="text-lg font-thin">
+      <p className="w-full max-w-[960px] text-lg font-thin text-center ">
         Choose from the wide variety of plants, specially selected for special
         occasions
       </p>
+      <div className=" w-full max-w-[960px] flex justify-between items-center pt-10 ">
+        <p className="text-sm font-thin">
+          after choosing the plants click on the button below to proceed
+        </p>
+        <button
+          className="bg-[#dcff50] text-[#212121] px-4 py-2 rounded-md text-xm"
+          onClick={() => router.push("/checkout")}
+        >
+          Proceed
+        </button>
+      </div>
+
       <div className="plant-list">
         {Object.keys(Plants).map((occasion) => (
           <div
-            className="w-full max-w-[960px] flex flex-col justify-start items-start py-10 gap-8 text-[#dcff50]"
+            className="w-full max-w-[960px] flex flex-col justify-start items-start py-4 gap-8 text-[#dcff50]"
             key={occasion}
           >
             <h2 className="text-4xl">{occasion}</h2>
@@ -62,9 +75,7 @@ const PlantOptionsComponent = () => {
                 <div
                   key={plant.id}
                   className={`plant-card ${
-                    selectedPlants.includes(plant.id)
-                      ? " text-[#212121]"
-                      : ""
+                    selectedPlants.includes(plant.id) ? " text-[#212121]" : ""
                   }`}
                 >
                   <PlantCard
