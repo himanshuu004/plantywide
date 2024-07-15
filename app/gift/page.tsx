@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect, Suspense } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
@@ -10,6 +12,19 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 const PlantOptionsComponent = () => {
+  const [cart, setCart] = useState<string[]>([]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(storedCart);
+  }, []);
+
+  const handleAddToCart = (plantId: string) => {
+    const updatedCart = [...cart, plantId];
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
   return (
     <div
       className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center ${jetBrainsMono.className} pb-10`}
@@ -35,6 +50,7 @@ const PlantOptionsComponent = () => {
                     imag={plant.plantImage}
                     name={plant.plantName}
                     price={plant.price}
+                    handleAddToCart={handleAddToCart}
                   />
                 </div>
               ))}

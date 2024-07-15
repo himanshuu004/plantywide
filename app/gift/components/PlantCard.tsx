@@ -8,9 +8,16 @@ interface PlantCardProps {
   imag: string | StaticImageData;
   id: string;
   price: string;
+  handleAddToCart: (plantId: string) => void; // New prop for the add to cart function
 }
 
-const PlantCard: React.FC<PlantCardProps> = ({ name, imag, id, price }) => {
+const PlantCard: React.FC<PlantCardProps> = ({
+  name,
+  imag,
+  id,
+  price,
+  handleAddToCart,
+}) => {
   return (
     <div
       className={`bg-[#fdfdfd] text-[#212121] w-64 h-180 flex flex-col justify-center items-center rounded-lg rounded-b-lg `}
@@ -46,7 +53,8 @@ const PlantCard: React.FC<PlantCardProps> = ({ name, imag, id, price }) => {
         </div>
       </div>
       <div
-        className={`w-[100%]   text-[#212121] font-semibold mt-4 px-4 py-2 cursor-pointer rounded-b-lg text-center ${"bg-[#dcff50]"}`}
+        className={`w-[100%] text-[#212121] font-semibold mt-4 px-4 py-2 cursor-pointer rounded-b-lg text-center bg-[#dcff50]`}
+        onClick={() => handleAddToCart(id)}
       >
         Add to Cart
       </div>
