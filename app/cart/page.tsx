@@ -1,79 +1,62 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navbar from "@/app/components/Navbar";
-import Plants from "../constants";
-import Image from "next/image";
+import { JetBrains_Mono } from "next/font/google";
+import PlantsDetails from "./components/PlantsDetails";
+import Summary from "./components/Summary";
 
-const Cart = () => {
-  const [cartItems, setCartItems] = useState<string[]>([]);
+const jetBrainsMono = JetBrains_Mono({
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartItems(storedCart);
-  }, []);
-
-  const getPlantDetails = (plantId: string) => {
-    for (const occasion in Plants) {
-      const plant = Plants[occasion as keyof typeof Plants].find(
-        (p) => p.id === plantId
-      );
-      if (plant) return plant;
-    }
-    return null;
-  };
-
+const CheckOut = () => {
   return (
     <div
-      className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-center items-center pb-10`}
+      className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-start items-center ${jetBrainsMono.className} pb-10`}
     >
       <Navbar />
-      <h1 className="text-4xl mb-4">Your Cart</h1>
-      <div className="w-full max-w-[960px] flex flex-col gap-4">
-        {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          cartItems.map((plantId) => {
-            const plant = getPlantDetails(plantId);
-            return (
-              plant && (
-                <div
-                  key={plant.id}
-                  className={`bg-[#fdfdfd] text-[#212121] w-full flex flex-col justify-start items-center rounded-lg p-4 mb-4`}
-                >
-                  <div className="w-full flex justify-between items-center">
-                    <Image
-                      src={
-                        typeof plant.plantImage === "string"
-                          ? plant.plantImage
-                          : plant.plantImage
-                      }
-                      alt={plant.plantName}
-                      width={100}
-                      height={100}
-                      className="object-cover rounded-md"
-                    />
-                    <div className="flex flex-col justify-start items-start ml-4">
-                      <h4 className="font-light text-lg">{plant.plantName}</h4>
-                      <p className="text-sm ">4.8</p>
-                      <div className="flex justify-between items-end w-full mt-2">
-                        <h4 className="font-light text-sm line-through text-[#949494]">
-                          {plant.price + "0"}
-                        </h4>
-                        <h4 className="font-light text-2xl ">
-                          {plant.price + "0"}
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
+      <div className="w-full max-w-[960px] flex flex-col justify-start items-start gap-8 text-[#fdfdfd]">
+        <div className="w-full flex flex-col justify-start items-statr gap-6  py-4">
+          <h4 className="text-6xl">CheckOut</h4>
+          <div className=" w-full flex justify-start items-start gap-4">
+            <div className=" w-[70%] flex flex-col justify-start items-start gap-2 px-2  rounded-lg">
+              <h4 className="text-xl text-[#dcff50]">Personal Details</h4>
+              <div className="w-full flex justify-start items-start gap-4 text-md opacity-90  ">
+                <div className="w-1/3 flex flex-col justify-start items-start gap-2">
+                  <p className=" opacity-35">Name</p>
+                  <input
+                    type="text"
+                    placeholder="Pallav"
+                    className="w-full h-10 px-4 text-[#212121] rounded-md "
+                  />
                 </div>
-              )
-            );
-          })
-        )}
+                <div className="w-1/3 flex flex-col justify-start items-start gap-2">
+                  <p className=" opacity-35">Email</p>
+                  <input
+                    type="text"
+                    placeholder="abc@g.com"
+                    className="w-full h-10 px-4 text-[#212121] rounded-md"
+                  />
+                </div>
+                <div className="w-1/3 flex flex-col justify-start items-start gap-2">
+                  <p className=" opacity-35">Phone</p>
+                  <input
+                    type="text"
+                    placeholder="Phone"
+                    className="w-full h-10 px-4 text-[#212121] rounded-md"
+                  />
+                </div>
+              </div>
+              <PlantsDetails />
+            </div>
+            <div className=" w-[30%] flex flex-col justify-start items-start gap-2 px-2 py-4 border-[1px] rounded-lg">
+              <Summary />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default CheckOut;
