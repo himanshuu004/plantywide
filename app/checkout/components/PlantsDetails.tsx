@@ -4,10 +4,11 @@ import PCard from "./PCard";
 
 const PlantsDetails = () => {
   let selectedPlants: string[] = [];
-
-  selectedPlants = JSON.parse(
-    window.localStorage.getItem("selectedPlants") || "[]"
-  );
+  useEffect(() => {
+    selectedPlants = JSON.parse(
+      window.localStorage.getItem("selectedPlants") || "[]"
+    );
+  }, []);
   console.log(selectedPlants.length);
   return (
     <div className=" w-full flex flex-col justify-start items-start gap-2  py-6 text-[#929292] ">

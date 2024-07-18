@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Plants from "@/app/constants";
 
 interface Plant {
@@ -19,10 +19,11 @@ const Summary = () => {
     return allPlants.find((plant) => plant.id === id);
   };
   let selectedPlants: string[] = [];
-
-  selectedPlants = JSON.parse(
-    window.localStorage.getItem("selectedPlants") || "[]"
-  );
+  useEffect(() => {
+    selectedPlants = JSON.parse(
+      window.localStorage.getItem("selectedPlants") || "[]"
+    );
+  }, []);
   let total = 0;
   let plants = selectedPlants.map((id) => fetchPlant(id) as Plant);
 
