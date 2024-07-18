@@ -1,5 +1,8 @@
 .env
+.env*.example
+.env.local
 node_modules
 .next
 .vercel
-
+backend/node_modules
+backend/.env
