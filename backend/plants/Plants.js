@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Plant = require("./Plant_schema");
+const Plant = require("./Plants_schema");
 
 const addPlant = async (req, res) => {
   try {

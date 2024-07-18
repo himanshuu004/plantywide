@@ -11,6 +11,14 @@ const {
 } = require("./cart/cart");
 const app = express();
 
+const {
+  addPlant,
+  getPlants,
+  deleteAllPlants,
+  deletePlantById,
+  updatePlantById,
+} = require("./plants/Plants");
+
 dotenv.config();
 app.use(express.json());
 
