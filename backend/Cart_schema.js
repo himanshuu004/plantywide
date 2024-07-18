@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema({
-  id: String,
-  count: Number,
+const CartItemSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
+  count: {
+    type: Number,
+    required: true,
+  },
 });
 
-const CartItem = mongoose.model("cartItem", Schema);
-
-module.exports = CartItem;
+module.exports = mongoose.model("CartItem", CartItemSchema);
