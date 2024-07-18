@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const CartItem = require("./Cart_schema");
 
 const Addtocart = async (req, res) => {
   try {
@@ -54,10 +55,9 @@ const Incrementcart = async (req, res) => {
 const Decrementcart = async (req, res) => {
   try {
     const cart = await CartItem.findOne({ id: req.params.id });
-    if(cart.count === 1){
+    if (cart.count === 1) {
       pass;
-    }
-    else{
+    } else {
       cart.count -= 1;
       await cart.save();
     }
@@ -65,4 +65,13 @@ const Decrementcart = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
+};
+
+module.exports = {
+  Addtocart,
+  Getcart,
+  Deletecart,
+  DeletecartId,
+  Incrementcart,
+  Decrementcart,
 };
