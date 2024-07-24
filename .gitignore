@@ -5,4 +5,4 @@ node_modules
 .next
 .vercel
 backend/node_modules/
-backend/.env
+*/.env
