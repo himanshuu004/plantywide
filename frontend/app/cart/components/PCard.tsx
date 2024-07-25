@@ -1,6 +1,7 @@
 import React from "react";
 import Plants from "@/app/constants";
 import Image from "next/image";
+import { incrementCart, decrementCart } from "./cart-api";
 
 interface Plant {
   id: string;
@@ -15,9 +16,10 @@ interface Plant {
 
 interface PCardProps {
   id: string;
+  count: number;
 }
 
-const PCard: React.FC<PCardProps> = ({ id }) => {
+const PCard: React.FC<PCardProps> = ({ id, count }) => {
   const fetchPlant = (id: string): Plant | undefined => {
     const allPlants = Object.values(Plants).flat();
     return allPlants.find((plant) => plant.id === id);
@@ -40,6 +42,27 @@ const PCard: React.FC<PCardProps> = ({ id }) => {
         </h4>
         <p className=" text-lg text-[#dcff50] text-right">{plant.occasion}</p>
         <p className=" col-span-2 text-sm">{plant.description}</p>
+        <div className=" w-full flex justify-start  items-center gap-4">
+          <div
+            onClick={() => {
+              count <= 1
+                ? alert("Can't decrease , please remove the item")
+                : decrementCart(id);
+            }}
+            className=" w-auto h-auto p-4 flex justify-center items-center"
+          >
+            {" "}
+            -
+          </div>
+          <p className="text-xs">{count}</p>
+          <div
+            onClick={() => incrementCart(id)}
+            className=" w-auto h-auto p-4 flex justify-center items-center"
+          >
+            {" "}
+            +
+          </div>
+        </div>
         <div className=" w-full flex justify-start  items-center gap-4">
           <p className="text-xs">Delivery date </p>
           <input

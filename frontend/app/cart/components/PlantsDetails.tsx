@@ -1,17 +1,36 @@
 "use client";
-import React, { use, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PCard from "./PCard";
+import { getCart } from "./cart-api";
+
+interface PlantsDetailsProps {
+  id: string;
+  count: number;
+}
 
 const PlantsDetails = () => {
-  let selectedPlants: string[] = [];
+  const [selectedPlants, setSelectedPlants] = useState<PlantsDetailsProps[]>(
+    []
+  );
+
   useEffect(() => {
-    selectedPlants = JSON.parse(window.localStorage.getItem("cart") || "[]");
+    const fetchCartData = async () => {
+      try {
+        const cartData = await getCart();
+        setSelectedPlants(cartData);
+      } catch (error) {
+        console.error("Failed to fetch cart data:", error);
+      }
+    };
+
+    fetchCartData();
   }, []);
+
   return (
-    <div className=" w-full flex flex-col justify-start items-start gap-2  py-6 text-[#929292] ">
+    <div className="w-full flex flex-col justify-start items-start gap-2 py-6 text-[#929292]">
       <h4 className="text-xl text-[#dcff50]">Plants selected</h4>
-      {selectedPlants.map((id) => (
-        <PCard key={id} id={id} />
+      {selectedPlants.map((item) => (
+        <PCard key={item.id} id={item.id} count={item.count} />
       ))}
     </div>
   );
