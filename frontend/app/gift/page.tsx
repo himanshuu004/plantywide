@@ -5,6 +5,7 @@ import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
 import Plants from "../constants";
 import PlantCard from "./components/PlantCard";
+import { addToCart } from "../cart/components/cart-api";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -12,17 +13,17 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 const PlantOptionsComponent = () => {
-  const [cart, setCart] = useState<string[]>([]);
+  const [addingToCart, setAddingToCart] = useState(false);
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(storedCart);
-  }, []);
-
-  const handleAddToCart = (plantId: string) => {
-    const updatedCart = [...cart, plantId];
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const handleAddToCart = async (plantId: string) => {
+    try {
+      setAddingToCart(true);
+      await addToCart(plantId, 1);
+    } catch (error) {
+      console.error("Failed to add to cart:", error);
+    } finally {
+      setAddingToCart(false);
+    }
   };
 
   return (
@@ -50,7 +51,7 @@ const PlantOptionsComponent = () => {
                     imag={plant.plantImage}
                     name={plant.plantName}
                     price={plant.price}
-                    handleAddToCart={handleAddToCart}
+                    handleAddToCart={() => handleAddToCart(plant.id)}
                   />
                 </div>
               ))}
