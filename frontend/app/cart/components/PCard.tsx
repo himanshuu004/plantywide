@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Plants from "@/app/constants";
 import Image from "next/image";
-import { incrementCart, decrementCart } from "./cart-api";
+import { incrementCart, decrementCart, deleteCartItem } from "./cart-api";
+import { MdDeleteOutline } from "react-icons/md";
+import LoaderData from "./LoaderData";
 
 interface Plant {
   id: string;
@@ -17,17 +19,59 @@ interface Plant {
 interface PCardProps {
   id: string;
   count: number;
+  onUpdate: () => void;
 }
 
-const PCard: React.FC<PCardProps> = ({ id, count }) => {
-  const fetchPlant = (id: string): Plant | undefined => {
-    const allPlants = Object.values(Plants).flat();
-    return allPlants.find((plant) => plant.id === id);
+const PCard: React.FC<PCardProps> = ({ id, count, onUpdate }) => {
+  const [plant, setPlant] = useState<Plant | undefined>(undefined);
+  const [loading, setLoading] = useState(false); // State to track
+
+  useEffect(() => {
+    const fetchPlant = (id: string): Plant | undefined => {
+      const allPlants = Object.values(Plants).flat();
+      return allPlants.find((plant) => plant.id === id);
+    };
+    setPlant(fetchPlant(id));
+  }, [id]);
+
+  const handleIncrement = async () => {
+    try {
+      setLoading(true);
+      await incrementCart(id);
+      onUpdate(); // Trigger the parent component to re-fetch the cart data
+    } catch (error) {
+      console.error("Failed to fetch cart data:", error);
+    } finally {
+      setLoading(false);
+    }
   };
-  const plant = fetchPlant(id) as Plant;
+
+  const handleDecrement = async () => {
+    try {
+      if (count <= 1) {
+        alert("Can't decrease, please remove the item");
+      } else {
+        setLoading(true);
+        await decrementCart(id);
+        onUpdate(); // Trigger the parent component to re-fetch the cart data
+      }
+    } catch (error) {
+      console.error("Failed to fetch cart data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    await deleteCartItem(id);
+    onUpdate();
+  };
+
+  if (!plant) return null;
+
   return (
     <div className="w-full flex justify-start items-start gap-4 px-4 py-6 border-[1px] border-[#949494] rounded-lg">
-      <div className="  flex justify-center items-center ">
+      <div className="flex justify-center items-center">
         <Image
           src={plant.plantImage}
           alt={plant.plantName}
@@ -36,42 +80,41 @@ const PCard: React.FC<PCardProps> = ({ id, count }) => {
           className="w-32 h-32 object-cover rounded-lg"
         />
       </div>
-      <div className=" w-full grid grid-cols-2 grid-flow-row gap-y-4 gap-x-2">
-        <h4 className=" text-xl font-medium text-[#fdfdfd]">
+      <div className="w-full grid grid-cols-2 gap-y-4 gap-x-2">
+        <h4 className="text-xl font-medium text-[#fdfdfd]">
           {plant.plantName}
         </h4>
-        <p className=" text-lg text-[#dcff50] text-right">{plant.occasion}</p>
-        <p className=" col-span-2 text-sm">{plant.description}</p>
-        <div className=" w-full flex justify-start  items-center gap-4">
+        <p className="text-lg text-[#dcff50] text-right">{plant.occasion}</p>
+        <p className="col-span-2 text-sm">{plant.description}</p>
+        <div className="w-full flex justify-start items-center gap-4">
           <div
-            onClick={() => {
-              count <= 1
-                ? alert("Can't decrease , please remove the item")
-                : decrementCart(id);
-            }}
-            className=" w-auto h-auto p-4 flex justify-center items-center"
+            onClick={handleDecrement}
+            className="w-6 h-6  flex justify-center items-center cursor-pointer text-[#dcff50] border-[1px] border-[#dcff50] rounded-md"
           >
-            {" "}
             -
           </div>
-          <p className="text-xs">{count}</p>
+          <p className="text-xs">{loading ? <LoaderData size={6} /> : count}</p>
           <div
-            onClick={() => incrementCart(id)}
-            className=" w-auto h-auto p-4 flex justify-center items-center"
+            onClick={handleIncrement}
+            className="w-6 h-6   flex justify-center items-center cursor-pointer border-[1px] text-[#dcff50] border-[#dcff50] rounded-md"
           >
-            {" "}
             +
           </div>
         </div>
-        <div className=" w-full flex justify-start  items-center gap-4">
+        <div
+          onClick={handleDelete}
+          className=" w-full flex justify-end items-center opacity-60 cursor-pointer "
+        >
+          <MdDeleteOutline size={24} color="#D2042D" />
+        </div>
+        <div className="w-full flex justify-start items-center gap-4">
           <p className="text-xs">Delivery date </p>
           <input
             type="date"
-            className=" w-32 rounded-md text-gray-500 p-2 text-xs opacity-80"
+            className="w-32 rounded-md text-gray-500 p-2 text-xs opacity-80"
           />
         </div>
-
-        <p className=" col-span-[25%] w-auto text-end text-sm  hover:text-[#dcff50] duration-300 cursor-pointer">
+        <p className="col-span-[25%] w-auto text-end text-sm hover:text-[#dcff50] duration-300 cursor-pointer">
           view details {">>"}{" "}
         </p>
       </div>
