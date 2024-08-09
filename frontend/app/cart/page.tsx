@@ -3,6 +3,8 @@ import Navbar from "@/app/components/Navbar";
 import { JetBrains_Mono } from "next/font/google";
 import PlantsDetails from "./components/PlantsDetails";
 import Summary from "./components/Summary";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -55,6 +57,7 @@ const CheckOut = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

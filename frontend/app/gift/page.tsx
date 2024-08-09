@@ -6,6 +6,9 @@ import Navbar from "@/app/components/Navbar";
 import Plants from "../constants";
 import PlantCard from "./components/PlantCard";
 import { addToCart } from "../cart/components/cart-api";
+import Link from "next/link";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -18,11 +21,13 @@ const PlantOptionsComponent = () => {
   const handleAddToCart = async (plantId: string) => {
     try {
       setAddingToCart(true);
+      toast.success("Adding to cart...");
       await addToCart(plantId, 1);
     } catch (error) {
       console.error("Failed to add to cart:", error);
     } finally {
       setAddingToCart(false);
+      toast.success("Added to cart");
     }
   };
 
@@ -35,6 +40,15 @@ const PlantOptionsComponent = () => {
         Choose from the wide variety of plants, specially selected for special
         occasions
       </p>
+      <div className="w-full max-w-[986px]  flex flex-row justify-end items-end ">
+        <Link href="/cart">
+          <div
+            className={`w-[100%]  text-[#212121] font-semibold mt-4 px-4 py-2 cursor-pointer rounded-lg text-center bg-[#dcff50]`}
+          >
+            Go to Cart
+          </div>
+        </Link>
+      </div>
       <div className="plant-list">
         {Object.keys(Plants).map((occasion) => (
           <div
@@ -59,6 +73,7 @@ const PlantOptionsComponent = () => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };

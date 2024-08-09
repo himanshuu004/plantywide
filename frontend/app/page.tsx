@@ -9,7 +9,6 @@ import GifthGrowth from "./components/GifthGrowth";
 import WhyUs from "./components/WhyUs";
 import Navbar from "./components/Navbar";
 
-
 const jetBrainsMono = JetBrains_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"], // You can specify the weight and other options
   subsets: ["latin"], // Specify the subsets you want to use
