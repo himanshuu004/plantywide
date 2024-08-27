@@ -1,5 +1,5 @@
 // backend/cart/cart.js
-const CartItem = require("./Cart_Schema");
+const Cart = require("./Cart_Schema");
 
 // Add to cart
 const Addtocart = async (req, res) => {
@@ -65,7 +65,7 @@ const Deletecart = async (req, res) => {
   }
 };
 
-// backend/cart/cart.js
+// Delete specific item from cart
 const DeletecartId = async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -87,7 +87,7 @@ const DeletecartId = async (req, res) => {
   }
 };
 
-// backend/cart/cart.js
+// Increment item count in cart
 const Incrementcart = async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -111,7 +111,7 @@ const Incrementcart = async (req, res) => {
   }
 };
 
-// backend/cart/cart.js
+// Decrement item count in cart
 const Decrementcart = async (req, res) => {
   if (!req.isAuthenticated()) {
     return res.status(401).json({ message: "Unauthorized" });

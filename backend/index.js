@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
+const MongoStore = require("connect-mongo");
 dotenv.config();
 
 const app = express();
@@ -32,12 +32,27 @@ app.use(
 app.use(express.json());
 
 // Session setup
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false }, // Set to true if using https
+//   })
+// );
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET, // Replace with your own secret
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using https
+    store: MongoStore.create({
+      mongoUrl: "yourMongoDBConnectionString",
+      mongooseConnection: mongoose.connection,
+    }),
+    cookie: {
+      maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days
+    },
   })
 );
 
@@ -71,7 +86,10 @@ passport.deserializeUser((user, done) => {
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URL, {})
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
