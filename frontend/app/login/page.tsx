@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const handleLogin = () => {
@@ -7,7 +9,10 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div
+      className={`w-full h-full min-h-[100vh] bg-[#212121] text-[#fdfdfd] flex flex-col justify-start items-center `}
+    >
+      <Navbar />
       <button onClick={handleLogin}>Login with Google</button>
     </div>
   );
