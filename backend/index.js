@@ -6,9 +6,13 @@ const passport = require("passport");
 const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const MongoStore = require("connect-mongo");
+const bodyParser = require("body-parser");
+const cartRoutes = require("./cart/cart");
 dotenv.config();
 
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 // CORS setup
 const allowedOrigins = [
@@ -32,26 +36,18 @@ app.use(
 app.use(express.json());
 
 // Session setup
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false }, // Set to true if using https
-//   })
-// );
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET, // Replace with your own secret
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: "yourMongoDBConnectionString",
+      mongoUrl: process.env.MONGO_URL, // Ensure this is a valid MongoDB connection string
       mongooseConnection: mongoose.connection,
     }),
     cookie: {
       maxAge: 14 * 24 * 60 * 60 * 1000, // 14 days
+      secure: process.env.NODE_ENV === "production", // true for HTTPS
     },
   })
 );
@@ -65,7 +61,9 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google/callback`,
+      callbackURL: `${
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
+      }/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
       // Save user profile or create user in database
@@ -105,14 +103,14 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect("http://localhost:3000"); // Redirect to your frontend after successful login
+    res.redirect(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"); // Redirect to your frontend after successful login
   }
 );
 
 app.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect("http://localhost:3000");
+    res.redirect(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000");
   });
 });
 
