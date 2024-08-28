@@ -7,7 +7,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const MongoStore = require("connect-mongo");
 const bodyParser = require("body-parser");
-const cartRoutes = require("./cart/cart");
+const cartRoutes = require("./cart/cart").default;
 dotenv.config();
 
 const app = express();
@@ -122,7 +122,7 @@ const {
   DeletecartId,
   Incrementcart,
   Decrementcart,
-} = require("./cart/cart");
+} = require("./cart/cart").default;
 
 app.post("/addtocart", Addtocart);
 app.get("/getcart", Getcart);

@@ -1,7 +1,7 @@
 // backend/cart/Cart_Schema.js
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const CartItemSchema = new mongoose.Schema({
+const CartItemSchema = new Schema({
   plantId: {
     type: String,
     required: true, // ID of the plant
@@ -12,7 +12,7 @@ const CartItemSchema = new mongoose.Schema({
   },
 });
 
-const CartSchema = new mongoose.Schema({
+const CartSchema = new Schema({
   userId: {
     type: String, // OAuth user ID
     required: true,
@@ -21,4 +21,4 @@ const CartSchema = new mongoose.Schema({
   items: [CartItemSchema], // Array of items in the cart
 });
 
-module.exports = mongoose.model("Cart", CartSchema);
+export default model("Cart", CartSchema);
