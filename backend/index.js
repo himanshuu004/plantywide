@@ -111,7 +111,7 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    res.redirect(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"); // Redirect to your frontend after successful login
+    res.redirect("https://planty-beige.vercel.app" || "http://localhost:3000");
   }
 );
 
@@ -145,9 +145,9 @@ app.get("/plants", getPlants);
 app.delete("/plants", deleteAllPlants);
 app.delete("/plant/:id", deletePlantById);
 app.put("/plant/:id", updatePlantById);
-app.get("/", (req, res) => {
-  res.redirect("https://planty-beige.vercel.app");
-});
+// app.get("/", (req, res) => {
+//   res.redirect("https://planty-beige.vercel.app");
+// });
 // Plant routes end
 
 app.listen(8000, () => {
