@@ -145,7 +145,9 @@ app.get("/plants", getPlants);
 app.delete("/plants", deleteAllPlants);
 app.delete("/plant/:id", deletePlantById);
 app.put("/plant/:id", updatePlantById);
-
+app.get("/", (req, res) => {
+  res.redirect("https://planty-beige.vercel.app");
+});
 // Plant routes end
 
 app.listen(8000, () => {
