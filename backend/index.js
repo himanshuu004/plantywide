@@ -7,7 +7,15 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const MongoStore = require("connect-mongo");
 const bodyParser = require("body-parser");
-const cartRoutes = require("./cart/cart").default;
+const {
+  Addtocart,
+  Getcart,
+  Deletecart,
+  DeletecartId,
+  Incrementcart,
+  Decrementcart,
+} = require("./cart/cart");
+
 dotenv.config();
 
 const app = express();
@@ -113,16 +121,6 @@ app.get("/logout", (req, res) => {
     res.redirect(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000");
   });
 });
-
-// Cart Functionalities Start
-const {
-  Addtocart,
-  Getcart,
-  Deletecart,
-  DeletecartId,
-  Incrementcart,
-  Decrementcart,
-} = require("./cart/cart").default;
 
 app.post("/addtocart", Addtocart);
 app.get("/getcart", Getcart);

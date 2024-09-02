@@ -1,7 +1,31 @@
-import CartSchema from "./Cart_Schema"; // Importing the CartSchema
+// backend/cart/cart.js
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
-// Create a Mongoose model from the schema
-const Cart = mongoose.model("Cart", CartSchema);
+// Define the CartItem schema
+const CartItemSchema = new Schema({
+  plantId: {
+    type: String,
+    required: true, // ID of the plant
+  },
+  count: {
+    type: Number,
+    required: true, // Quantity of the plant
+  },
+});
+
+// Define the Cart schema
+const CartSchema = new Schema({
+  userId: {
+    type: String, // OAuth user ID
+    required: true,
+    unique: true,
+  },
+  items: [CartItemSchema], // Array of items in the cart
+});
+
+// Create the Cart model
+const Cart = model("Cart", CartSchema);
 
 // Add to cart
 const Addtocart = async (req, res) => {
@@ -152,7 +176,7 @@ const Decrementcart = async (req, res) => {
   }
 };
 
-export default {
+module.exports = {
   Addtocart,
   Getcart,
   Deletecart,
