@@ -75,6 +75,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       // Save user profile or create user in database
+      console.log(profile);
       return done(null, profile);
     }
   )
@@ -145,10 +146,6 @@ app.get("/plants", getPlants);
 app.delete("/plants", deleteAllPlants);
 app.delete("/plant/:id", deletePlantById);
 app.put("/plant/:id", updatePlantById);
-// app.get("/", (req, res) => {
-//   res.redirect("https://planty-beige.vercel.app");
-// });
-// Plant routes end
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
