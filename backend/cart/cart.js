@@ -183,4 +183,5 @@ module.exports = {
   DeletecartId,
   Incrementcart,
   Decrementcart,
+  Cart,
 };

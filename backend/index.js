@@ -14,8 +14,10 @@ const {
   DeletecartId,
   Incrementcart,
   Decrementcart,
+  Cart,
 } = require("./cart/cart");
-
+const User = require("./userSchema");
+const { Schema, model } = mongoose;
 dotenv.config();
 
 const app = express();
@@ -70,12 +72,29 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${
-        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
+        "http://localhost:8000" || process.env.NEXT_PUBLIC_BASE_URL
       }/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
-      // Save user profile or create user in database
-      console.log(profile);
+      const user = {
+        googleId: profile.id,
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        avatar: profile.photos[0].value,
+      };
+      if (
+        User.findOne({ googleId: user.googleId }) === null ||
+        User.findOne({ googleId: user.googleId }) === ""
+      ) {
+        const cart = new User({
+          googleId: user.googleId,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+          createdAt: Date.now(),
+        });
+        cart.save();
+      }
       return done(null, profile);
     }
   )
@@ -110,8 +129,15 @@ app.get(
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res, next) => {
+    console.log("Google OAuth callback hit!");
+    next();
+  },
+  passport.authenticate("google", {
+    failureRedirect: "https://planty-beige.vercel.app/login",
+  }),
   (req, res) => {
+    console.log("User", req.body);
     res.redirect("https://planty-beige.vercel.app" || "http://localhost:3000");
   }
 );
