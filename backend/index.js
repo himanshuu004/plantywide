@@ -7,6 +7,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const MongoStore = require("connect-mongo");
 const bodyParser = require("body-parser");
+const {cookieParser} = require("cookie-parser");
 const {
   Addtocart,
   Getcart,
@@ -23,7 +24,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use(cookieParser());
 // CORS setup
 const allowedOrigins = [
   "http://localhost:3000",
@@ -138,6 +139,7 @@ app.get(
   }),
   (req, res) => {
     console.log("User", req.body);
+    res.cookie("user", req.body);
     res.redirect("https://planty-beige.vercel.app" || "http://localhost:3000");
   }
 );
