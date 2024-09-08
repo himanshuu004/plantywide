@@ -7,7 +7,7 @@ const session = require("express-session");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const MongoStore = require("connect-mongo");
 const bodyParser = require("body-parser");
-const {cookieParser} = require("cookie-parser");
+const { cookieParser } = require("cookie-parser");
 const {
   Addtocart,
   Getcart,
@@ -73,7 +73,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${
-        "http://localhost:8000" || process.env.NEXT_PUBLIC_BASE_URL
+        process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
       }/auth/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
