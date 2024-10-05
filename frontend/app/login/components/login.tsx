@@ -42,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleForm }) => {
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
       <p>
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <span onClick={onToggleForm} className="toggle-link">
           Sign up
         </span>
