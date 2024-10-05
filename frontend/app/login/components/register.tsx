@@ -55,13 +55,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onToggleForm }) => {
           />
         </div>
         <div className="w-full min-w-80 flex flex-col justify-end items-end gap-2">
-          <button type="submit" className="hover:text-[#dcff50]">Sign Up</button>
+          <button type="submit" className="hover:text-[#dcff50]">
+            Sign Up
+          </button>
         </div>
         {errorMessage && <p className="error">{errorMessage}</p>}
       </form>
       <p>
         Already have an account?{" "}
-        <span onClick={onToggleForm} className="text-[#dcff50] cursor-pointer">>
+        <span onClick={onToggleForm} className="text-[#dcff50] cursor-pointer">
           Log in
         </span>
       </p>
