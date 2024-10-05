@@ -11,7 +11,8 @@ const plantController = require("./plants/Plants"); // Plant Handlers
 dotenv.config();
 const app = express();
 
-// Middleware
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -21,7 +22,7 @@ app.use(
   })
 );
 
-// MongoDB Connection
+
 const connectDB = async () => {
   try {
     

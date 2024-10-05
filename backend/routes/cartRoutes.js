@@ -11,23 +11,23 @@ const {
 const  authMiddleware  = require("../authMiddleware"); // Authentication middleware
 
 const router = express.Router();
+router.use(express.json());
 
 // Add to cart
-router.post("/add", authMiddleware, Addtocart);
+router.post("/add", Addtocart);
 
 // Get cart
-router.get("/", authMiddleware, Getcart);
+router.get("/",authMiddleware, Getcart);
 
 // Delete entire cart
 router.delete("/", authMiddleware, Deletecart);
 
 // Delete specific item from cart
-router.delete("/:plantId", authMiddleware, DeletecartId);
+router.delete("/:plantId", authMiddleware,DeletecartId);
 
 // Increment item count in cart
 router.put("/increment/:plantId", authMiddleware, Incrementcart);
 
 // Decrement item count in cart
-router.put("/decrement/:plantId", authMiddleware, Decrementcart);
-
+router.put("/decrement/:plantId",authMiddleware, Decrementcart);
 module.exports = router;
