@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Plants from "@/app/constants";
 import Image from "next/image";
-import { incrementCart, decrementCart, deleteCartItem } from "./cart-api";
+import {
+  incrementCartItem,
+  decrementCartItem,
+  deleteCartItem,
+} from "../../services/cartService";
 import { MdDeleteOutline } from "react-icons/md";
 import LoaderData from "./LoaderData";
 
@@ -37,7 +41,7 @@ const PCard: React.FC<PCardProps> = ({ id, count, onUpdate }) => {
   const handleIncrement = async () => {
     try {
       setLoading(true);
-      await incrementCart(id);
+      await incrementCartItem(id);
       onUpdate(); // Trigger the parent component to re-fetch the cart data
     } catch (error) {
       console.error("Failed to fetch cart data:", error);
@@ -52,7 +56,7 @@ const PCard: React.FC<PCardProps> = ({ id, count, onUpdate }) => {
         alert("Can't decrease, please remove the item");
       } else {
         setLoading(true);
-        await decrementCart(id);
+        await decrementCartItem(id);
         onUpdate(); // Trigger the parent component to re-fetch the cart data
       }
     } catch (error) {

@@ -5,7 +5,7 @@ import { JetBrains_Mono } from "next/font/google";
 import Navbar from "@/app/components/Navbar";
 import Plants from "../constants";
 import PlantCard from "./components/PlantCard";
-import { addToCart } from "../cart/components/cart-api";
+import { addToCart } from "../services/cartService";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
