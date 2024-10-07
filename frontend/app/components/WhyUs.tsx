@@ -7,7 +7,7 @@ const WhyUs: React.FC = () => {
       <div className="w-full flex justify-start items-center text-5xl font-medium px-4">
         Why Choose Us?
       </div>
-      <div className="w-full flex justify-start items-start gap-2">
+      <div className="w-full flex flex-col md:flex-row justify-start items-start gap-2">
         <GCards
           bgcolor="a9f00f"
           title="Passion for Plants"

@@ -3,7 +3,7 @@ import "./Celebrations.css";
 
 const Celebrations = () => {
   return (
-    <div className="w-full max-w-[960px] flex flex-col  justify-start items-start py-20 gap-8  text-[#212121]">
+    <div className="w-full max-w-[960px] flex flex-col  justify-start items-start py-20 gap-8  px-6 md:px-0 text-[#212121]">
       <div className="w-full flex justify-start  items-center text-5xl font-medium ">
         Occasions We Celebrate
       </div>

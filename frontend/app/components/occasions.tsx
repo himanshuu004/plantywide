@@ -4,10 +4,10 @@ import OCards from "./OCards";
 const Occasions = () => {
   return (
     <div className="w-full max-w-[960px] flex flex-col  justify-start items-start py-20 gap-8 ">
-      <div className="w-full flex justify-start  items-center text-5xl font-medium ">
+      <div className="w-full flex justify-start  items-center text-3xl md:text-5xl font-medium px-8 md:p-0">
         Celebrate with Nature
       </div>
-      <div className="w-full grid grid-flow-row grid-cols-2  justify-start  items-center">
+      <div className="w-full grid grid-flow-row grid-cols-1 md:grid-cols-2  justify-start  items-center">
         <OCards
           index={1}
           title="Birthdays"

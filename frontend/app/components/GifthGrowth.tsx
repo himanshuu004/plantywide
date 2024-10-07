@@ -3,11 +3,11 @@ import GCards from "./GCards";
 
 const GifthGrowth: React.FC = () => {
   return (
-    <div className="w-full max-w-[960px] flex flex-col justify-start items-start py-20 gap-8">
-      <div className="w-full flex justify-start items-center text-5xl font-medium px-4">
+    <div className="w-full max-w-[960px] flex flex-col justify-start items-start py-20 px-6 md:px-0 gap-8">
+      <div className="w-full flex justify-start items-center text-3xl md:text-5xl font-medium px-4">
         The Gift of Growth
       </div>
-      <div className="w-full flex justify-start items-start gap-4">
+      <div className="w-full flex flex-col md:flex-row justify-start items-start gap-4">
         <GCards
           bgcolor="444444"
           title="Personalized Care"
