@@ -4,9 +4,9 @@ const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const authController = require("./controllers/authController"); // Auth Routes
-const cartRoutes = require("./routes/cartRoutes"); // Cart Routes
-const plantController = require("./plants/Plants"); // Plant Handlers
+const authController = require("./controllers/authController"); 
+const cartRoutes = require("./routes/cartRoutes"); 
+const plantController = require("./plants/Plants"); 
 
 dotenv.config();
 const app = express();
@@ -40,16 +40,15 @@ app.use("/auth", authController);
 // Cart Routes (Protected)
 app.use("/cart", cartRoutes);
 
-// Plant Routes (Public)
+
 // app.use("/plants", plantController);
 
-// Centralized Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Internal Server Error" });
 });
 
-// Server Listening on Port 8000
+
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
 });

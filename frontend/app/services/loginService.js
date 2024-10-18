@@ -1,9 +1,16 @@
 import axios from "axios";
 
+// Function to determine the base URL depending on environment
+const getBaseURL = () => {
+  return window.location.hostname === "localhost"
+    ? "http://localhost:8000"
+    : "https://planty-wide-dyxi.vercel.app";
+};
+
 // Register function to send user details to backend
 export const registerUser = async (username, password) => {
   try {
-    const response = await axios.post("http://localhost:8000/auth/register", {
+    const response = await axios.post(`${getBaseURL()}/auth/register`, {
       username,
       password,
     });
@@ -19,7 +26,7 @@ export const registerUser = async (username, password) => {
 export const loginUser = async (username, password) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/auth/login",
+      `${getBaseURL()}/auth/login`,
       {
         username,
         password,
