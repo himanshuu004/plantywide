@@ -11,8 +11,6 @@ const plantController = require("./plants/Plants");
 dotenv.config();
 const app = express();
 
-
-
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -22,10 +20,8 @@ app.use(
   })
 );
 
-
 const connectDB = async () => {
-  try {
-    
+  try {    
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connected");
   } catch (err) {
@@ -34,12 +30,10 @@ const connectDB = async () => {
 };
 connectDB();
 
-// Auth Routes
+
 app.use("/auth", authController);
 
-// Cart Routes (Protected)
 app.use("/cart", cartRoutes);
-
 
 // app.use("/plants", plantController);
 
@@ -47,7 +41,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Internal Server Error" });
 });
-
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
