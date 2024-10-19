@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const router = express.Router();
-
+const dotenv = require("dotenv");
+dotenv.config();
 // User registration
 router.post("/register", async (req, res) => {
   try {
@@ -14,8 +15,7 @@ router.post("/register", async (req, res) => {
     if (doesUserExist) {
       console.log(`User registration failed: ${username} already exists.`);
       return res.status(409).json({ success: false, message: "User already exists" });
-    }
-
+  }
     // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ username, password: hashedPassword });
@@ -31,6 +31,7 @@ router.post("/register", async (req, res) => {
 // User login
 router.post("/login", async (req, res) => {
   try {
+    console.log(process.env.JWT_SECRET)
     const { username, password } = req.body;
     const user = await User.findOne({ username });
 
@@ -56,13 +57,13 @@ router.post("/login", async (req, res) => {
       .cookie("refreshToken", refreshToken, {
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure in production
+        secure: false, // Use secure in production
         sameSite: "lax",
       })
       .cookie("accessToken", accessToken, {
         maxAge: 60 * 60 * 1000, // 1 hour
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         sameSite: "lax",
       })
       .json({ success: true, message: "Login successful" });
@@ -99,7 +100,7 @@ router.get("/refresh", async (req, res) => {
         .cookie("accessToken", newAccessToken, {
           maxAge: 60 * 60 * 1000, // 1 hour
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: false,
           sameSite: "lax",
         })
         .json({ success: true, message: "Access token refreshed" });

@@ -10,7 +10,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in well-drained soil, water regularly, and provide full sunlight.",
-      price: "₹50",
+      price: 500,
     },
     {
       id: "NEE234",
@@ -22,7 +22,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in fertile, well-drained soil. Water deeply and provide occasional pruning.",
-      price: "₹55",
+      price: 550,
     },
     {
       id: "GUL345",
@@ -34,7 +34,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in sunny locations with well-drained soil. Water regularly and trim after flowering season.",
-      price: "₹60",
+      price: 600,
     },
     // Add more plants for Birthdays here
   ],
@@ -49,7 +49,7 @@ export const Plants = {
       suitableWeatherType: "Subtropical",
       careInstructions:
         "Plant in a sunny spot with well-drained soil. Water regularly and protect from strong winds.",
-      price: "₹60",
+      price: 600,
     },
     {
       id: "FRA456",
@@ -61,7 +61,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in rich, well-drained soil. Water regularly and provide occasional pruning.",
-      price: "₹65",
+      price: 650,
     },
     {
       id: "ASH567",
@@ -73,7 +73,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in fertile soil with good drainage. Water deeply and protect from strong winds.",
-      price: "₹70",
+      price: 700,
     },
     // Add more plants for Anniversaries here
   ],
@@ -88,7 +88,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in rich, well-drained soil. Water generously and provide occasional pruning.",
-      price: "₹55",
+      price: 550,
     },
     {
       id: "TUL678",
@@ -100,7 +100,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in fertile soil with good drainage. Water regularly and protect from frost.",
-      price: "₹60",
+      price: 600,
     },
     {
       id: "AML789",
@@ -112,7 +112,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in well-drained soil. Water regularly and provide full sunlight.",
-      price: "₹65",
+      price: 650,
     },
     // Add more plants for Graduations here
   ],
@@ -127,7 +127,7 @@ export const Plants = {
       suitableWeatherType: "Temperate",
       careInstructions:
         "Plant in a cool, moist environment. Provide adequate water and light.",
-      price: "₹70",
+      price: 700,
     },
     {
       id: "PIN890",
@@ -139,7 +139,7 @@ export const Plants = {
       suitableWeatherType: "Temperate",
       careInstructions:
         "Plant in well-drained, acidic soil. Water regularly and protect from strong winds.",
-      price: "₹75",
+      price: 750,
     },
     {
       id: "HIB901",
@@ -151,7 +151,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in fertile, well-drained soil. Water regularly and provide occasional pruning.",
-      price: "₹80",
+      price: 800,
     },
     // Add more plants for Holidays here
   ],
@@ -166,7 +166,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in sandy, well-drained soil. Water regularly and protect from strong winds.",
-      price: "₹75",
+      price: 750,
     },
     {
       id: "BAN345",
@@ -178,7 +178,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in fertile soil with good drainage. Water regularly and provide full sunlight.",
-      price: "₹70",
+      price: 700,
     },
     {
       id: "TUL456",
@@ -190,7 +190,7 @@ export const Plants = {
       suitableWeatherType: "Tropical",
       careInstructions:
         "Plant in well-drained soil. Water regularly and provide full sunlight.",
-      price: "₹65",
+      price: 650,
     },
     // Add more plants for New Home here
   ],

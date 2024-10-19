@@ -7,7 +7,7 @@ interface PlantCardProps {
   name: string;
   imag: string | StaticImageData;
   id: string;
-  price: string;
+  price: number;
   handleAddToCart: (plantId: string) => void; // New prop for the add to cart function
 }
 
@@ -39,9 +39,9 @@ const PlantCard: React.FC<PlantCardProps> = ({
           </div>
           <div className="w-[30%] flex flex-col justify-end items-end ">
             <h4 className="font-light text-sm line-through text-[#949494]">
-              {price + "0"}
+            ₹{`${price+(price*0.2)}`}
             </h4>
-            <h4 className="font-light text-2xl ">{price + "0"}</h4>
+            <p className="font-light text-2xl ">₹{`${price}`}</p>
           </div>
         </div>
         <div className="w-full">

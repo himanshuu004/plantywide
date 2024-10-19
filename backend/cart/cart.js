@@ -29,16 +29,18 @@ const Cart = model("Cart", CartSchema);
 
 // Add to cart
 const Addtocart = async (req, res) => {
-  const userId = req.username || "abc";
+  if (!req.username) {
+    return res.status(401).json({ success: false, message: "Unauthorized" });
+  }
+  const userId = req.username;
+  console.log("cart requested", req.body);
   let { plantId, count } = req.body;
-  console.log("cart requested", userId, count);
+  console.log("cart requested", userId, plantId, count);
 
   const prevCart = await Cart.findOne({ userId });
   if (prevCart) {
     console.log("cart already exists");
-    const item = prevCart.items.find(
-      (item) => item.plantId.toString() === plantId.toString()
-    );
+    const item = prevCart.items.find((item) => item.plantId === plantId);
     if (item) {
       console.log("item already exists", item);
       if (item.count != 0) {

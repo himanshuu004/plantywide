@@ -3,12 +3,16 @@ const API_URL = "http://localhost:8000/cart";
 
 // Add item to cart
 export const addToCart = async (plantId, count) => {
+  console.log("response", plantId, count);
   const response = await fetch(`${API_URL}/add`, {
     method: "POST",
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ plantId, count }),
   });
-
+  console.log("response", response.body);
   const data = await response.json();
   return data.cart;
 };

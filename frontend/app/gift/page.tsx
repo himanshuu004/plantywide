@@ -23,11 +23,12 @@ const PlantOptionsComponent = () => {
       setAddingToCart(true);
       toast.success("Adding to cart...");
       await addToCart(plantId, 1);
+      toast.success("Added to cart!");
     } catch (error) {
       console.error("Failed to add to cart:", error);
+      toast.error("Failed to add to cart. Please try again.");
     } finally {
       setAddingToCart(false);
-      toast.success("Added to cart");
     }
   };
 

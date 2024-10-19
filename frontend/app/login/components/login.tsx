@@ -15,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleForm }) => {
     try {
       const data = await loginUser(username, password);
       localStorage.setItem("token", data.token); // Save token in localStorage
-      alert("Login successful!");
+      window.location.href= "/" // Redirect to home page
       setErrorMessage(""); // Clear any previous error
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
@@ -31,11 +31,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleForm }) => {
       >
         <div className="w-full min-w-64 flex flex-col justify-start items-start gap-2">
           <label htmlFor="username" className="text-[#dcff50]">
-            Username
+            Email
           </label>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
             value={username}
             className="w-full p-2 border-2 border-[#fdfdfd] bg-[#212121] rounded-lg"
             onChange={(e) => setUsername(e.target.value)}
