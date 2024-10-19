@@ -8,7 +8,9 @@ const authMiddleware = (req, res, next) => {
 
   if (!accessToken) {
     console.log("No access token provided.");
-    return res.sendStatus(401); // Unauthorized
+    return res.json(
+      {success : false, message : "Access token not found"}
+    ); // Unauthorized
   }
 
   try {
@@ -17,7 +19,9 @@ const authMiddleware = (req, res, next) => {
     next();
   } catch (err) {
     console.error("JWT Verification Error:", err.message); // Log the error
-    return res.sendStatus(403); // Forbidden
+    return res.json(
+      {success : false, message : "Verification failed"}
+    );  // Forbidden
   }
 };
 

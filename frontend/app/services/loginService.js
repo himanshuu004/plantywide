@@ -34,15 +34,28 @@ export const loginUser = async (username, password) => {
       { withCredentials: true }
     );
     console.log("Login successful:", response.data);
-    return response.data; // contains token and user data
+    return response.data;
   } catch (error) {
     console.error("Login failed:", error.response.data);
-    throw error; // Rethrow error for handling in the component
+    throw error;
   }
+};
+
+export const verifyToken = async () => {
+  const response =  await fetch("http://localhost:8000/auth/verify", {
+    method: "GET",
+    credentials: "include",
+  })
+  const data = await response.json();
+  if(data.success){
+    return true;
+  }
+  return false;
+   
 };
 
 // Logout function
 export const logoutUser = () => {
-  localStorage.removeItem("token"); // Remove token from localStorage
+  localStorage.removeItem("token");
   alert("Logged out successfully!");
 };

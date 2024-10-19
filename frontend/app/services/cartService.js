@@ -24,6 +24,10 @@ export const getCart = async () => {
     credentials: "include",
   });
   const data = await response.json();
+  if(data.success === false) {
+    console.log("login required");
+    return false;
+  }
   console.log("data from cart", data);
   return data.cart.items;
 };

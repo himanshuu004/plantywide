@@ -14,14 +14,18 @@ router.post("/register", async (req, res) => {
     const doesUserExist = await User.exists({ username });
     if (doesUserExist) {
       console.log(`User registration failed: ${username} already exists.`);
-      return res.status(409).json({ success: false, message: "User already exists" });
-  }
+      return res
+        .status(409)
+        .json({ success: false, message: "User already exists" });
+    }
     // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({ username, password: hashedPassword });
-  
+
     console.log(`User registered successfully: ${username}`);
-    res.status(201).json({ success: true, message: "User registered successfully" });
+    res
+      .status(201)
+      .json({ success: true, message: "User registered successfully" });
   } catch (err) {
     console.error("Registration error:", err.message);
     res.status(500).json({ success: false, message: "Server error" });
@@ -31,26 +35,34 @@ router.post("/register", async (req, res) => {
 // User login
 router.post("/login", async (req, res) => {
   try {
-    console.log(process.env.JWT_SECRET)
+    console.log(process.env.JWT_SECRET);
     const { username, password } = req.body;
     const user = await User.findOne({ username });
 
     // Check if user exists
     if (!user) {
       console.log(`Login failed: User not found - ${username}`);
-      return res.status(404).json({ success: false, message: "User not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
     }
 
     // Verify password
     const doPasswordsMatch = await bcrypt.compare(password, user.password);
     if (!doPasswordsMatch) {
       console.log(`Login failed: Invalid password for user - ${username}`);
-      return res.status(401).json({ success: false, message: "Invalid username or password" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Invalid username or password" });
     }
 
     // Generate tokens
-    const accessToken = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    const refreshToken = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "30d" });
+    const accessToken = jwt.sign({ username }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    const refreshToken = jwt.sign({ username }, process.env.JWT_SECRET, {
+      expiresIn: "30d",
+    });
 
     // Set tokens in cookies
     res
@@ -73,6 +85,32 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/verify", async (req, res) => {
+  try {
+    const { accessToken } = req.cookies;
+
+    // Check if access token exists
+    if (!accessToken) {
+      console.log("Access token not found.");
+      return res
+        .json({ success: false, message: "Access token not found" });
+    }
+
+    // Verify access token
+    jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        console.error("Access token error:", err.message);
+        return res
+          .json({ success: false, message: "Invalid access token" });
+      }
+      const { username } = decoded;
+      res.json({ success: true, message: "Access token is valid", username });
+    });
+  } catch (err) {
+    console.error("Access token verification error:", err.message);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 // Refresh access token
 router.get("/refresh", async (req, res) => {
   try {
@@ -81,19 +119,25 @@ router.get("/refresh", async (req, res) => {
     // Check if refresh token exists
     if (!refreshToken) {
       console.log("Refresh token not found.");
-      return res.status(401).json({ success: false, message: "Refresh token not found" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Refresh token not found" });
     }
 
     // Verify refresh token
     jwt.verify(refreshToken, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         console.error("Refresh token error:", err.message);
-        return res.status(403).json({ success: false, message: "Invalid refresh token" });
+        return res
+          .status(403)
+          .json({ success: false, message: "Invalid refresh token" });
       }
 
       // Generate new access token
       const { username } = decoded;
-      const newAccessToken = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      const newAccessToken = jwt.sign({ username }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
 
       // Set new access token in cookie
       res

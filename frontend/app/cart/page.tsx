@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import { JetBrains_Mono } from "next/font/google";
 import PlantsDetails from "./components/PlantsDetails";
@@ -9,6 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getCart } from "../services/cartService";
 import Loader from "../components/Loader";
+import { verifyToken } from "../services/loginService";
+import { useRouter } from "next/navigation";
 
 const jetBrainsMono = JetBrains_Mono({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -24,11 +26,29 @@ const CheckOut = () => {
   const [selectedPlants, setSelectedPlants] = useState<PlantsDetailsProps[]>(
     []
   );
+  const router = useRouter();
+  // useEffect(() => {
+  //   const a =async() => {
+  //   const res = await verifyToken();
+  //   console.log("res", res);
+  //   if(typeof res === "object"){
+  //     console.log("User is logged in");
+  //   }
+  //   else{
+  //     router.push("/login");
+  //   }
+  // }
+  // a()
+  // }, []);
   const [loading, setLoading] = useState(true); // State to track loading status
   const fetchCartData = async () => {
     try {
       console.log("Fetching cart data...");
       const cartData = await getCart();
+      if(!cartData){
+        router.push("/login");
+        return;
+      }
 
       console.log("Cart data:", cartData);
       setSelectedPlants(cartData);
