@@ -8,6 +8,7 @@ import {
 } from "../../services/cartService";
 import { MdDeleteOutline } from "react-icons/md";
 import LoaderData from "./LoaderData";
+import { useRouter } from "next/navigation";
 
 interface Plant {
   id: string;
@@ -17,7 +18,7 @@ interface Plant {
   description: string;
   suitableWeatherType: string;
   careInstructions: string;
-  price: string;
+  price: number;
 }
 
 interface PCardProps {
@@ -29,7 +30,7 @@ interface PCardProps {
 const PCard: React.FC<PCardProps> = ({ id, count, onUpdate }) => {
   const [plant, setPlant] = useState<Plant | undefined>(undefined);
   const [loading, setLoading] = useState(false); // State to track
-
+  const router = useRouter();
   useEffect(() => {
     const fetchPlant = (id: string): Plant | undefined => {
       const allPlants = Object.values(Plants).flat();
@@ -118,7 +119,7 @@ const PCard: React.FC<PCardProps> = ({ id, count, onUpdate }) => {
             className="w-32 rounded-md text-gray-500 p-2 text-xs opacity-80"
           />
         </div>
-        <p className="col-span-[25%] w-auto text-end text-sm hover:text-[#dcff50] duration-300 cursor-pointer">
+        <p className="col-span-[25%] w-auto text-end text-sm hover:text-[#dcff50] duration-300 cursor-pointer" onClick={()=> router.push(`/plants/${plant.id}`)}>
           view details {">>"}{" "}
         </p>
       </div>

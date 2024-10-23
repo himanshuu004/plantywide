@@ -14,7 +14,7 @@ interface Plant {
   description: string;
   suitableWeatherType: string;
   careInstructions: string;
-  price: string;
+  price: number;
 }
 
 interface Params {
