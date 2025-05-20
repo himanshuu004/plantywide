@@ -7,7 +7,7 @@ import Reminder from "../Reminder/ReminderSystem";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showReminder, setShowReminder] = useState(false); // 🔸 NEW
+  const [showReminder, setShowReminder] = useState(false);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -33,6 +33,9 @@ const Navbar = () => {
           <Link href="/AboutUs">
             <li>About Us</li>
           </Link>
+          <Link href="/Simulator">
+            <li>Simulator</li>
+          </Link>
           <button onClick={() => setShowReminder((prev) => !prev)}>
             <li className="cursor-pointer">Reminder</li>
           </button>
@@ -42,7 +45,6 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* 🔸 Conditionally render the ReminderSystem below the Navbar */}
       {showReminder && (
         <div className="w-full flex justify-center items-center">
           <div className="w-full max-w-[960px]">
